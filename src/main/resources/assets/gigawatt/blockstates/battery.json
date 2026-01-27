@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": {"model": "gigawatt:block/battery"},
+    "facing=south": {"model": "gigawatt:block/battery", "y": 180},
+    "facing=east": {"model": "gigawatt:block/battery", "y": 90},
+    "facing=west": {"model": "gigawatt:block/battery", "y": 270}
+  }
+}
