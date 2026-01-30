@@ -14,6 +14,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.ICapabilityProvider;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
 
 @EventBusSubscriber(modid = Gigawatt.MOD_ID)
 public class GwEvents {
@@ -25,6 +26,12 @@ public class GwEvents {
                 GwBlockEntities.BATTERY_BE.get(),
                 (Battery_BE be, Direction side) -> be.getEnergy()
         );
+    }
+
+    @SubscribeEvent
+    public static void onServerStarted(ServerStartedEvent event)
+    {
+        GwUtils.serverStart(event);
     }
 
 }
