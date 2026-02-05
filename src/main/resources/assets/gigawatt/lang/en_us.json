@@ -1,9 +1,22 @@
 {
+  "//////////////////////////////////////////////////// MISC ////////////////////////////////////////////////////": "",
   "creative_tab.gigawatt.gigawatt_items": "Gigawatt Items",
 
-  "item.gigawatt.wand_of_transmutation": "Wand of Transmutation",
+
+
+
+  "//////////////////////////////////////////////////// ITEMS ////////////////////////////////////////////////////": "",
+  "item.gigawatt.wand_of_transmutation": "Wand Of Transmutation",
+  "item.gigawatt.wand_of_transmutation.tooltip.summary": "Can cycle between any block's _variants_ (Woodtypes, Colors, Bricks, etc...).",
+  "item.gigawatt.wand_of_transmutation.tooltip.condition1": "When used on a Surface",
+  "item.gigawatt.wand_of_transmutation.tooltip.behaviour1": "_Transmutates_ the block, cycling between their _variants._",
+
   "item.gigawatt.nether_star_dust": "Nether Star Dust",
 
-  "block.gigawatt.battery": "Battery"
 
+  
+
+  "//////////////////////////////////////////////////// BLOCKS ////////////////////////////////////////////////////": "",
+  "block.gigawatt.battery": "Battery",
+  "block.gigawatt.heavy_casing": "Heavy Casing"
 }

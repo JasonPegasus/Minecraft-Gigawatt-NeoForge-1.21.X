@@ -1,7 +1,9 @@
 package com.jasonpegasus.gigawatt.block;
 
 import com.jasonpegasus.gigawatt.GwInfiniteEnergy;
+import com.jasonpegasus.gigawatt.blockentity.BatteryBlockEntity;
 import com.mojang.serialization.MapCodec;
+import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -15,20 +17,16 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.energy.EnergyStorage;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.Console;
-import java.io.PrintStream;
-
-public class Battery_B extends BaseEntityBlock {
+public class BatteryBlock extends BaseEntityBlock implements IWrenchable {
 
 
-    private static final Logger log = LoggerFactory.getLogger(Battery_B.class);
+    private static final Logger log = LoggerFactory.getLogger(BatteryBlock.class);
 
-    public Battery_B(Properties p) {
+    public BatteryBlock(Properties p) {
         super(p);
     }
 
@@ -36,7 +34,7 @@ public class Battery_B extends BaseEntityBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (level.getBlockEntity(pos) instanceof Battery_BE battery_be)
+        if (level.getBlockEntity(pos) instanceof BatteryBlockEntity battery_be)
         {
             GwInfiniteEnergy energy = (GwInfiniteEnergy) battery_be.getEnergy();
             System.out.println("ENERGY: "+energy.getEnergyStored()+"/"+energy.getMaxEnergyStored());
@@ -54,11 +52,11 @@ public class Battery_B extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state)
-    {return new Battery_BE(pos, state);}
+    {return new BatteryBlockEntity(pos, state);}
 
     // DIRECTIONAL BLOCK //
 
-    public static final MapCodec<Battery_B> CODEC = simpleCodec(Battery_B::new);
+    public static final MapCodec<BatteryBlock> CODEC = simpleCodec(BatteryBlock::new);
 
     @Override //codec no se para que
     protected MapCodec<? extends BaseEntityBlock> codec()

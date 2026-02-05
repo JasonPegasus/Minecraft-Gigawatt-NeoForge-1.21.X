@@ -1,22 +1,41 @@
 package com.jasonpegasus.gigawatt.item;
 
 import com.jasonpegasus.gigawatt.GwUtils;
+import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.simibubi.create.foundation.item.ItemDescription;
+import com.simibubi.create.foundation.item.TooltipModifier;
+import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+
+import java.util.Random;
+
+import static org.joml.Math.lerp;
 
 public class WandOfTransmutation_I extends Item {
 
-    public WandOfTransmutation_I(Properties properties) {
-        super(properties);
+
+    public WandOfTransmutation_I() {
+        super(new Item.Properties()
+                .stacksTo(1)
+                .rarity(Rarity.UNCOMMON)
+        );
     }
 
 
@@ -24,40 +43,47 @@ public class WandOfTransmutation_I extends Item {
     @Override
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
-            BlockState blockState = level.getBlockState(context.getClickedPos());
-            Block block = blockState.getBlock();
+        if (level.isClientSide) { return InteractionResult.PASS; }
 
-            String blockId = BuiltInRegistries.BLOCK.getKey(block).toString();
-            GwUtils.print("Original block ID is: " + blockId);
+        BlockState blockState = level.getBlockState(context.getClickedPos());
+        Block block = blockState.getBlock();
 
-            String blockWoodType = getMatchingWoodType(blockId);
-            if (blockWoodType == null) {
-                GwUtils.print("Matching WoodType not found!");
-                return InteractionResult.FAIL;
-            }
+        String blockId = BuiltInRegistries.BLOCK.getKey(block).toString();
+        GwUtils.print("Original block ID is: " + blockId);
 
-            String newBlockId = blockId.replace(blockWoodType, getNextWoodType(blockWoodType));
-            GwUtils.print("New block ID is: " + newBlockId);
-
-            ResourceLocation rl = ResourceLocation.tryParse(newBlockId);
-            if (BuiltInRegistries.BLOCK.get(rl) == Blocks.AIR) {
-                GwUtils.print("The new block ID haven't been found!");
-                return InteractionResult.FAIL;
-            }
-
-        if (!level.isClientSide) {
-            BlockState newBlockState = BuiltInRegistries.BLOCK.get(rl).defaultBlockState();
-            newBlockState = GwUtils.copyProperties(blockState, newBlockState);
-
-            level.setBlockAndUpdate(context.getClickedPos(), newBlockState);
+        String blockWoodType = getMatchingWoodType(blockId);
+        if (blockWoodType == null) {
+            GwUtils.print("Matching WoodType not found!");
+            return InteractionResult.FAIL;
         }
+
+        String newBlockId = "";
+        int i = 1;
+        while (!GwUtils.isBlockIDValid(newBlockId))
+        {
+            newBlockId = blockId.replace(blockWoodType, getNextWoodTypeBy(blockWoodType, i));
+            i++;
+            if (i > GwUtils.getWoodTypes().size()*2)
+            {
+                GwUtils.print("Failed iterating until finding new block");
+                return InteractionResult.FAIL;
+            }
+        }
+        GwUtils.print("New block ID is: " + newBlockId);
+
+        level.playSound(null, context.getClickedPos(), SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1f, (float)lerp(1.5, 2, Math.random()));
+
+        BlockState newBlockState = BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(newBlockId)).defaultBlockState();
+        newBlockState = GwUtils.copyProperties(blockState, newBlockState);
+
+        level.setBlockAndUpdate(context.getClickedPos(), newBlockState);
 
         return InteractionResult.SUCCESS;
     }
 
-    private String getNextWoodType(String woodType)
+    private String getNextWoodTypeBy(String woodType, int iteration)
     {
-        int i = GwUtils.getWoodTypes().indexOf(woodType)+1;
+        int i = GwUtils.getWoodTypes().indexOf(woodType)+iteration;
         if (GwUtils.getWoodTypes().size()-1 < i ){ i = 0;}
         return GwUtils.getWoodTypes().get(i);
     }
@@ -75,7 +101,8 @@ public class WandOfTransmutation_I extends Item {
         return bestMatch;
     }
 
-    @Override
-    public UseAnim getUseAnimation(ItemStack stack)
-    { return UseAnim.BRUSH; }
+
+
+
+
 }

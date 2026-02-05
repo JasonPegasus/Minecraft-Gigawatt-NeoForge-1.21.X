@@ -17,6 +17,6 @@ public class GwTags {
         public static final TagKey<Item> DUST_ITEMS = createTag("dusts", true);
 
         private static TagKey<Item> createTag(String name, boolean common)
-        {return ItemTags.create(ResourceLocation.fromNamespaceAndPath(common ? "c" : Gigawatt.MOD_ID, name));}
+        { return ItemTags.create(ResourceLocation.fromNamespaceAndPath(common ? "c" : Gigawatt.MOD_ID, name)); }
     }
 }

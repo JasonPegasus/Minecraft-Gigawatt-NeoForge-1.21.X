@@ -10,7 +10,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class GwCreativeTab {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Gigawatt.MOD_ID);
+    private static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Gigawatt.MOD_ID);
 
     public static final Supplier<CreativeModeTab> GIGAWATT_ITEMS_TAB = CREATIVE_MODE_TAB.register("gigawatt_items_tab",
             ()-> CreativeModeTab.builder()
@@ -34,5 +34,7 @@ public class GwCreativeTab {
     }
 
     public static void register(IEventBus eventBus)
-    {CREATIVE_MODE_TAB.register(eventBus);}
+    {
+        CREATIVE_MODE_TAB.register(eventBus);
+    }
 }

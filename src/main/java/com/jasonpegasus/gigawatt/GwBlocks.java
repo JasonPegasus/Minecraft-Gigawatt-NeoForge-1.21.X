@@ -1,12 +1,10 @@
 package com.jasonpegasus.gigawatt;
 
-import com.jasonpegasus.gigawatt.block.Battery_B;
-import com.jasonpegasus.gigawatt.block.Battery_BE;
+import com.jasonpegasus.gigawatt.block.BatteryBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -21,13 +19,10 @@ public class GwBlocks {
     // BLOCKS //
 
     public static final DeferredBlock<Block> BATTERY = registerBlock( "battery",
-            () -> new Battery_B(BlockBehaviour.Properties.of()
+            () -> new BatteryBlock(BlockBehaviour.Properties.of()
                     .strength(1f)
                     .sound(SoundType.METAL)
             ));
-
-
-
 
 
 

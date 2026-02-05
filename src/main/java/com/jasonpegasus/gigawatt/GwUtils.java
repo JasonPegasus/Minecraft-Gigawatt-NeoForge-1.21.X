@@ -4,6 +4,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
@@ -36,6 +37,10 @@ public class GwUtils {
     }
 
     // BLOCKSTATE COPYING //
+
+    public static boolean isBlockIDValid(String id)
+    { return BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(id)) != Blocks.AIR; }
+
     public static BlockState copyProperties(BlockState from, BlockState to)
     {
         for (Property<?> property : from.getProperties()) {

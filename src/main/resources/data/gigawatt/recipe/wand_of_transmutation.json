@@ -1,0 +1,33 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:ingots/brass"
+    },
+    "S": {
+      "item": "gigawatt:nether_star_dust"
+    },
+    "A": {
+      "tag": "c:gems/amethyst"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    },
+    "P": {
+      "item": "create:precision_mechanism"
+    }
+  },
+  "pattern": [
+    "BAB",
+    "BSB",
+    "BPB",
+    " B ",
+    " O "
+  ],
+  "result": {
+    "count": 1,
+    "id": "gigawatt:wand_of_transmutation"
+  }
+}
