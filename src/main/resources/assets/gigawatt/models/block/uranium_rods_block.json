@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "gigawatt:block/uranium_rods_block_top",
+    "side": "gigawatt:block/uranium_rods_block_side"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "tag": "c:deepslate"
+    }
+  ],
+  "processing_time": 250,
+  "results": [
+    {
+      "chance": 0.05,
+      "id": "create:crushed_raw_uranium"
+    }
+  ]
+}

@@ -4,13 +4,15 @@
 	"textures": {
 		"0": "create:block/depot_top",
 		"2": "create:block/palettes/industrial_iron_window_end",
-		"3": "gigawatt:heavy_casing",
-		"4": "gigawatt:heavy_casing_background",
-		"5": "gigawatt:heavy_casing_frame",
+		"3": "gigawatt:block/heavy_casing",
+		"4": "gigawatt:block/heavy_casing_background",
+		"5": "gigawatt:block/heavy_casing_frame",
 		"7": "create:block/palettes/industrial_iron_window",
 		"8": "create:block/palettes/small_rose_quartz_tiles",
-		"9": "create:block/copper_door_side"
+		"9": "create:block/copper_door_side",
+		"particle": "gigawatt:block/heavy_casing"
 	},
+	"render_type": "minecraft:cutout_mipped",
 	"elements": [
 		{
 			"name": "outer",
@@ -259,5 +261,35 @@
 		},
 		15,
 		16
-	]
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, 12, 0],
+			"translation": [-1.5, -1, 0],
+			"scale": [0.3, 0.3, 0.3]
+		},
+		"thirdperson_lefthand": {
+			"scale": [0.3, 0.3, 0.3]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 270.75, 0],
+			"translation": [-0.5, 2, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"ground": {
+			"translation": [0, 1.5, 0],
+			"scale": [0.3, 0.3, 0.3]
+		},
+		"gui": {
+			"rotation": [22.5, -135, 0],
+			"scale": [0.6, 0.6, 0.6]
+		},
+		"head": {
+			"translation": [0, 3, 0],
+			"scale": [1.2, 1.2, 1.2]
+		}
+	}
 }

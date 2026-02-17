@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "gigawatt:block/uranium_rods_block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "gigawatt:block/uranium_rods_block"
+    },
+    "axis=z": {
+      "model": "gigawatt:block/uranium_rods_block",
+      "x": 90
+    }
+  }
+}

@@ -2,6 +2,8 @@
   "//////////////////////////////////////////////////// MISC ////////////////////////////////////////////////////": "",
   "creative_tab.gigawatt.gigawatt_items": "Gigawatt Items",
 
+  "effect.gigawatt.engineers_eye": "Engineer's Eye",
+
 
 
 
@@ -12,11 +14,18 @@
   "item.gigawatt.wand_of_transmutation.tooltip.behaviour1": "_Transmutates_ the block, cycling between their _variants._",
 
   "item.gigawatt.nether_star_dust": "Nether Star Dust",
+  "item.gigawatt.uranium_rod": "Enriched Uranium Rod",
+  "item.gigawatt.uranium_ingot": "Uranium Ingot",
 
 
   
 
   "//////////////////////////////////////////////////// BLOCKS ////////////////////////////////////////////////////": "",
   "block.gigawatt.battery": "Battery",
-  "block.gigawatt.heavy_casing": "Heavy Casing"
+  "block.gigawatt.heavy_casing": "Heavy Casing",
+  "block.gigawatt.repair_station": "Repair Station",
+  "block.gigawatt.uranium_block": "Uranium Block",
+  "block.gigawatt.uranium_rods_block": "Uranium Rods Block",
+  "block.gigawatt.steam_vent": "Steam Vent",
+  "block.gigawatt.particle_accelerator_controller": "Particle Accelerator Controller"
 }

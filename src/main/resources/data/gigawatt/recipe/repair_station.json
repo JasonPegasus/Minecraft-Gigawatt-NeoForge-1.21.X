@@ -1,0 +1,33 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "gigawatt:heavy_casing"
+    },
+    "D": {
+      "item": "create:depot"
+    },
+    "G": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    },
+    "T": {
+      "item": "create:transmitter"
+    },
+    "P": {
+      "item": "create:precision_mechanism"
+    }
+  },
+  "pattern": [
+    "CEGTC",
+    "CPDPC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gigawatt:repair_station"
+  }
+}

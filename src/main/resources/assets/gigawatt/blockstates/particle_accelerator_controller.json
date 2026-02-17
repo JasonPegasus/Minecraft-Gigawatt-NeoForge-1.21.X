@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": {"model": "gigawatt:block/particle_accelerator_controller/accelerator_controller"},
+    "facing=south": {"model": "gigawatt:block/particle_accelerator_controller/accelerator_controller", "y": 180},
+    "facing=east": {"model": "gigawatt:block/particle_accelerator_controller/accelerator_controller", "y": 90},
+    "facing=west": {"model": "gigawatt:block/particle_accelerator_controller/accelerator_controller", "y": 270}
+  }
+}

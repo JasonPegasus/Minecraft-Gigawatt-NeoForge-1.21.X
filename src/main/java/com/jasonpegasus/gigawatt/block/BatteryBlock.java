@@ -1,6 +1,6 @@
 package com.jasonpegasus.gigawatt.block;
 
-import com.jasonpegasus.gigawatt.GwInfiniteEnergy;
+import com.jasonpegasus.gigawatt.custom.GwInfiniteEnergyCapacity;
 import com.jasonpegasus.gigawatt.blockentity.BatteryBlockEntity;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -36,7 +36,7 @@ public class BatteryBlock extends BaseEntityBlock implements IWrenchable {
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (level.getBlockEntity(pos) instanceof BatteryBlockEntity battery_be)
         {
-            GwInfiniteEnergy energy = (GwInfiniteEnergy) battery_be.getEnergy();
+            GwInfiniteEnergyCapacity energy = (GwInfiniteEnergyCapacity) battery_be.getEnergy();
             System.out.println("ENERGY: "+energy.getEnergyStored()+"/"+energy.getMaxEnergyStored());
             System.out.println("REAL ENERGY: "+energy.getRealEnergyStored());
         }

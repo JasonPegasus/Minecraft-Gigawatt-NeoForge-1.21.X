@@ -1,9 +1,8 @@
-package com.jasonpegasus.gigawatt;
+package com.jasonpegasus.gigawatt.custom;
 
-import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
 import net.neoforged.neoforge.energy.EnergyStorage;
 
-public class GwInfiniteEnergy extends EnergyStorage {
+public class GwInfiniteEnergyCapacity extends EnergyStorage {
     public static final int K = 1000;
     public static final int M = K*1000;
     public static final int G = M*1000;
@@ -16,7 +15,7 @@ public class GwInfiniteEnergy extends EnergyStorage {
 
     public long getRealEnergyStored() { return this.energy; }
 
-    public GwInfiniteEnergy(int startCapacity, int maxTransfer)
+    public GwInfiniteEnergyCapacity(int startCapacity, int maxTransfer)
     { super(startCapacity, maxTransfer, maxTransfer); }
 
     @Override

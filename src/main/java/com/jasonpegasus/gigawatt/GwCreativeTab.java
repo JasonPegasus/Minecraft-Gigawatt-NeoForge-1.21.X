@@ -3,6 +3,7 @@ package com.jasonpegasus.gigawatt;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -26,6 +27,10 @@ public class GwCreativeTab {
             @Override
             public void accept(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
                 for (var i : GwItems.ITEMS.getEntries())
+                {
+                    output.accept(i.get());
+                }
+                for (var i : Gigawatt.registrate().getAll(Registries.ITEM))
                 {
                     output.accept(i.get());
                 }

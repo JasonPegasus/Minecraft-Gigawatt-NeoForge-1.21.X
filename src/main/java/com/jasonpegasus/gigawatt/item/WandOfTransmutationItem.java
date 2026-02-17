@@ -1,37 +1,31 @@
 package com.jasonpegasus.gigawatt.item;
 
 import com.jasonpegasus.gigawatt.GwUtils;
-import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.item.ItemDescription;
-import com.simibubi.create.foundation.item.TooltipModifier;
-import net.minecraft.client.gui.components.Tooltip;
-import net.minecraft.client.resources.sounds.Sound;
+import com.jasonpegasus.gigawatt.item.renderer.WandOfTransmutationRenderer;
+import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
-import java.util.Random;
+import java.util.function.Consumer;
 
 import static org.joml.Math.lerp;
 
-public class WandOfTransmutation_I extends Item {
+public class WandOfTransmutationItem extends Item {
 
-
-    public WandOfTransmutation_I() {
+    public WandOfTransmutationItem() {
         super(new Item.Properties()
                 .stacksTo(1)
                 .rarity(Rarity.UNCOMMON)
@@ -101,8 +95,10 @@ public class WandOfTransmutation_I extends Item {
         return bestMatch;
     }
 
-
-
-
-
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    @SuppressWarnings("removal")
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(SimpleCustomRenderer.create(this, new WandOfTransmutationRenderer()));
+    }
 }

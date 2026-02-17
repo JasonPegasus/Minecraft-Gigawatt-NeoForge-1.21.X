@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "gigawatt:uranium_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "gigawatt:uranium_ingot"
+  }
+}

@@ -39,20 +39,6 @@
 		},
 		{
 			"name": "Rod Bottom Core",
-			"from": [6.59167, 17.5, 6.6201],
-			"to": [9.39167, 32, 9.4201],
-			"rotation": {"angle": -45, "axis": "y", "origin": [7.99167, 24.75, 8.0201]},
-			"faces": {
-				"north": {"uv": [2, 4, 5, 16], "texture": "#4"},
-				"east": {"uv": [11, 4, 14, 16], "texture": "#4"},
-				"south": {"uv": [8, 4, 11, 16], "texture": "#4"},
-				"west": {"uv": [5, 4, 8, 16], "texture": "#4"},
-				"up": {"uv": [8, 1, 11, 4], "rotation": 270, "texture": "#4"},
-				"down": {"uv": [5, 1, 8, 4], "rotation": 90, "texture": "#4"}
-			}
-		},
-		{
-			"name": "Rod Bottom Core",
 			"from": [9.30033, 14.03806, 6.5201],
 			"to": [10.30033, 18.03806, 9.5201],
 			"rotation": {"angle": -22.5, "axis": "z", "origin": [9.80033, 16.03806, 8.0201]},

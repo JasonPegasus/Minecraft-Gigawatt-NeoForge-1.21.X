@@ -1,7 +1,12 @@
 package com.jasonpegasus.gigawatt;
 
 
+import com.jasonpegasus.gigawatt.block.ParticleAcceleratorBlock;
 import com.jasonpegasus.gigawatt.blockentity.BatteryBlockEntity;
+import com.jasonpegasus.gigawatt.blockentity.ParticleAcceleratorBlockEntity;
+import com.jasonpegasus.gigawatt.blockentity.RepairStationBlockEntity;
+import com.jasonpegasus.gigawatt.blockentity.SteamVentBlockEntity;
+import com.jasonpegasus.gigawatt.blockentity.renderer.ParticleAcceleratorRenderer;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
@@ -14,29 +19,39 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 
 @EventBusSubscriber(modid = Gigawatt.MOD_ID)
 public class GwEvents {
 
-    @SubscribeEvent  // on the mod event bus
-    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(
+//    @SubscribeEvent
+//    public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
+//        WandOfTransmutation_I.registerClientExtensions(event);
+//    }
+
+    @SubscribeEvent
+    public static void registerCapabilities(RegisterCapabilitiesEvent e) {
+        e.registerBlockEntity(
                 Capabilities.EnergyStorage.BLOCK,
                 GwBlockEntities.BATTERY_BE.get(),
                 (BatteryBlockEntity be, Direction side) -> be.getEnergy()
         );
+        RepairStationBlockEntity.registerCapabilities(e);
+        SteamVentBlockEntity.registerCapabilities(e);
+        ParticleAcceleratorBlockEntity.registerCapabilities(e);
     }
 
     @SubscribeEvent
-    public static void onServerStarted(ServerStartedEvent event)
-    {
-        GwUtils.serverStart(event);
+    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers e) {
+        RepairStationBlockEntity.registerRenderers(e);
+        ParticleAcceleratorBlockEntity.registerRenderers(e);
     }
 
+
     @SubscribeEvent
-    public static void onTooltip(ItemTooltipEvent event) {
+    public static void registerTooltips(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
         Item item = stack.getItem();
 
@@ -47,6 +62,12 @@ public class GwEvents {
         TooltipModifier kineticModifier = TooltipModifier.mapNull(KineticStats.create(item));
         TooltipModifier finalModifier = descriptionModifier.andThen(kineticModifier);
         finalModifier.modify(event);
+    }
+
+    @SubscribeEvent
+    public static void onServerStarted(ServerStartedEvent event)
+    {
+        GwUtils.serverStart(event);
     }
 
 }

@@ -1,7 +1,8 @@
 {
   "variants": {
-    "": {
-      "model": "gigawatt:block/repair_station"
-    }
+    "facing=north": {"model": "gigawatt:block/repair_station"},
+    "facing=south": {"model": "gigawatt:block/repair_station", "y": 180},
+    "facing=east": {"model": "gigawatt:block/repair_station", "y": 90},
+    "facing=west": {"model": "gigawatt:block/repair_station", "y": 270}
   }
 }

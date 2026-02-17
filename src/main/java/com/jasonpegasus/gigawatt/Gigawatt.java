@@ -1,8 +1,12 @@
 package com.jasonpegasus.gigawatt;
 
+import com.simibubi.create.AllItems;
+import com.simibubi.create.Create;
+import com.simibubi.create.content.equipment.goggles.GogglesItem;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.CreativeModeTab;
 import org.slf4j.Logger;
 
@@ -25,7 +29,6 @@ public class Gigawatt {
     public static final Logger LOGGER = LogUtils.getLogger();
 
 
-
     private static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID)
             .defaultCreativeTab((ResourceKey<CreativeModeTab>) null);
 
@@ -34,15 +37,14 @@ public class Gigawatt {
 
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
-
         GwCreativeTab.register(modEventBus);
+        GwEffects.register(modEventBus);
         GwItems.register(modEventBus);
         GwBlocks.register(modEventBus);
         GwBlockEntities.register(modEventBus);
         GwBlocksCreate.register();
         GwBlockEntitiesCreate.register();
-
-        //REGISTRATE.defaultCreativeTab(GwCreativeTab.GIGAWATT_ITEMS_TAB);
+        GwFluids.register();
 
 
         modEventBus.addListener(this::addCreative);

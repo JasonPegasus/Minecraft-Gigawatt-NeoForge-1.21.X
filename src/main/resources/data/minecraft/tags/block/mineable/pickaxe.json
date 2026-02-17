@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "gigawatt:heavy_casing"
+    "gigawatt:heavy_casing",
+    "gigawatt:uranium_block"
   ]
 }

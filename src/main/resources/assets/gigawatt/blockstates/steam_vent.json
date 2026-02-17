@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=north": {"model": "gigawatt:block/steam_vent"},
+    "facing=south": {"model": "gigawatt:block/steam_vent", "y": 180},
+    "facing=east": {"model": "gigawatt:block/steam_vent", "y": 90},
+    "facing=west": {"model": "gigawatt:block/steam_vent", "y": 270},
+    "facing=up": {"model": "gigawatt:block/steam_vent", "x": 270},
+    "facing=down": {"model": "gigawatt:block/steam_vent", "x": 90}
+  }
+}

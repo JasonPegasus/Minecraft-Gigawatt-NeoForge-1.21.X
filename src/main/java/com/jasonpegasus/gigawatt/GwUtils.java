@@ -1,19 +1,40 @@
 package com.jasonpegasus.gigawatt;
 
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 
 import java.util.List;
+import java.util.Random;
 
 public class GwUtils {
+    public static int K = 1000;
+    public static int M = K*1000;
+    public static int G = M*1000;
+    public static int T = G*1000;
+
     public static void print(String msg)
     { System.out.println(msg); }
+
+    public static float random(float min, float max)
+    { return (float) (min + Math.random() * (max - min)); }
+
+    public static int randomInt(int min, int max)
+    {
+        return new Random().ints(min, max)
+                .findFirst()
+                .getAsInt();
+    }
+
+    public static Direction getBlockFacing(BlockState state)
+    { return state.getValue(DirectionalBlock.FACING); }
 
     public static void serverStart(ServerStartedEvent event)
     {

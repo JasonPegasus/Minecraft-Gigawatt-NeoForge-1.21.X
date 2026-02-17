@@ -1,0 +1,19 @@
+{
+  "type": "create:compacting",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "create:crushed_raw_uranium"
+    }
+  ],
+  "results": [
+    {
+      "chance": 0.07,
+      "id": "gigawatt:uranium_rod"
+    },
+    {
+      "amount": 1,
+      "id": "gigawatt:uranium_ingot"
+    }
+  ]
+}

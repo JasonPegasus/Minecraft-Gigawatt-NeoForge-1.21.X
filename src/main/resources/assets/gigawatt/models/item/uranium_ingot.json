@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gigawatt:item/uranium_ingot_full2"
+  }
+}
