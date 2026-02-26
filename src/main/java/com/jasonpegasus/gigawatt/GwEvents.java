@@ -1,12 +1,7 @@
 package com.jasonpegasus.gigawatt;
 
 
-import com.jasonpegasus.gigawatt.block.ParticleAcceleratorBlock;
-import com.jasonpegasus.gigawatt.blockentity.BatteryBlockEntity;
-import com.jasonpegasus.gigawatt.blockentity.ParticleAcceleratorBlockEntity;
-import com.jasonpegasus.gigawatt.blockentity.RepairStationBlockEntity;
-import com.jasonpegasus.gigawatt.blockentity.SteamVentBlockEntity;
-import com.jasonpegasus.gigawatt.blockentity.renderer.ParticleAcceleratorRenderer;
+import com.jasonpegasus.gigawatt.blockentity.*;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
@@ -40,13 +35,14 @@ public class GwEvents {
         );
         RepairStationBlockEntity.registerCapabilities(e);
         SteamVentBlockEntity.registerCapabilities(e);
-        ParticleAcceleratorBlockEntity.registerCapabilities(e);
+        PAControllerBlockEntity.registerCapabilities(e);
+        PAModuleBlockEntity.registerCapabilities(e);
     }
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers e) {
         RepairStationBlockEntity.registerRenderers(e);
-        ParticleAcceleratorBlockEntity.registerRenderers(e);
+        PAControllerBlockEntity.registerRenderers(e);
     }
 
 
@@ -66,8 +62,5 @@ public class GwEvents {
 
     @SubscribeEvent
     public static void onServerStarted(ServerStartedEvent event)
-    {
-        GwUtils.serverStart(event);
-    }
-
+    { GwUtils.serverStart(event); }
 }

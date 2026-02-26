@@ -4,7 +4,20 @@
 
   "effect.gigawatt.engineers_eye": "Engineer's Eye",
 
+  "//////////////////////////////////////////////////// MESSAGES ////////////////////////////////////////////////////": "",
+  "message.particle_accelerator.addmodule": "Added module at: ",
+  "message.particle_accelerator.clearmodules": "Cleared all modules",
+  "message.particle_accelerator.alreadypresentmodule": "This module was already added, or there was an problem when adding it",
 
+  "//////////////////////////////////////////////////// GOGGLES ////////////////////////////////////////////////////": "",
+  "gigawatt.tooltip.particle_accelerator.header": "Particle Accelerator Info",
+  "gigawatt.tooltip.particle_accelerator.modules": "Modules",
+  "gigawatt.tooltip.particle_accelerator.state": "State: ",
+  "gigawatt.tooltip.particle_accelerator.state.active": "Active",
+  "gigawatt.tooltip.particle_accelerator.state.inactive": "Inactive",
+  "gigawatt.tooltip.particle_accelerator.speed": "Current Speed: ",
+  "gigawatt.tooltip.particle_accelerator.notenoughmodules": "Not enough modules",
+  "gigawatt.tooltip.particle_accelerator.missingmodules": "Missing previously placed modules",
 
 
   "//////////////////////////////////////////////////// ITEMS ////////////////////////////////////////////////////": "",
@@ -27,5 +40,13 @@
   "block.gigawatt.uranium_block": "Uranium Block",
   "block.gigawatt.uranium_rods_block": "Uranium Rods Block",
   "block.gigawatt.steam_vent": "Steam Vent",
-  "block.gigawatt.particle_accelerator_controller": "Particle Accelerator Controller"
+
+  "block.gigawatt.particle_accelerator_controller": "Particle Accelerator Controller",
+  "block.gigawatt.particle_accelerator_controller.summary": "Main controller of the _Particle Accelerator*",
+  "block.gigawatt.particle_accelerator_controller.condition1": "When used on a Particle Accelerator Module",
+  "block.gigawatt.particle_accelerator_controller.behaviour1": "Saves the module's location for future placement",
+  "block.gigawatt.particle_accelerator_controller.condition2": "When used on air while crouching",
+  "block.gigawatt.particle_accelerator_controller.behaviour2": "Removes all saved module positions",
+
+  "block.gigawatt.particle_accelerator_module": "Particle Accelerator Module"
 }

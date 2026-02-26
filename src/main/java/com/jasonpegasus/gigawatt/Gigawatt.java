@@ -45,6 +45,8 @@ public class Gigawatt {
         GwBlocksCreate.register();
         GwBlockEntitiesCreate.register();
         GwFluids.register();
+        GwDataComponents.register(modEventBus);
+        GwModels.register();
 
 
         modEventBus.addListener(this::addCreative);

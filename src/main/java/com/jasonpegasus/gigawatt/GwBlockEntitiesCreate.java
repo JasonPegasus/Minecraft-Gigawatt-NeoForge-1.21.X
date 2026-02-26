@@ -1,9 +1,9 @@
 package com.jasonpegasus.gigawatt;
 
-import com.jasonpegasus.gigawatt.blockentity.ParticleAcceleratorBlockEntity;
+import com.jasonpegasus.gigawatt.blockentity.PAControllerBlockEntity;
+import com.jasonpegasus.gigawatt.blockentity.PAModuleBlockEntity;
 import com.jasonpegasus.gigawatt.blockentity.RepairStationBlockEntity;
 import com.jasonpegasus.gigawatt.blockentity.SteamVentBlockEntity;
-import com.jasonpegasus.gigawatt.blockentity.renderer.RepairStationRenderer;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
@@ -20,9 +20,14 @@ public class GwBlockEntitiesCreate {
             .validBlocks(GwBlocksCreate.STEAM_VENT)
             .register();
 
-    public static final BlockEntityEntry<ParticleAcceleratorBlockEntity> PARTICLE_ACCELERATOR = REGISTRATE
-            .blockEntity("particle_accelerator_be", ParticleAcceleratorBlockEntity::new)
+    public static final BlockEntityEntry<PAControllerBlockEntity> PARTICLE_ACCELERATOR_CONTROLLER = REGISTRATE
+            .blockEntity("particle_accelerator_controller_be", PAControllerBlockEntity::new)
             .validBlocks(GwBlocksCreate.PARTICLE_ACCELERATOR_CONTROLLER)
+            .register();
+
+    public static final BlockEntityEntry<PAModuleBlockEntity> PARTICLE_ACCELERATOR_MODULE = REGISTRATE
+            .blockEntity("particle_accelerator_module_be", PAModuleBlockEntity::new)
+            .validBlocks(GwBlocksCreate.PARTICLE_ACCELERATOR_MODULE)
             .register();
 
     public static void register() {}

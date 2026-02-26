@@ -1,16 +1,21 @@
 package com.jasonpegasus.gigawatt;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -20,8 +25,19 @@ public class GwUtils {
     public static int G = M*1000;
     public static int T = G*1000;
 
+    public static int addLooped(int number, int max)
+    { return addLooped(number, max, 1); }
+    public static int addLooped(int number, int max, int add)
+    { return (number+1 <= max) ? number+1 : 0; }
+
+    public static ChatFormatting lerpChatColors(float alpha, ChatFormatting... colors)
+    { return colors[Math.round((colors.length-1)*Math.clamp(alpha, 0, 1))]; }
+
     public static void print(String msg)
     { System.out.println(msg); }
+
+    public static void printSided(Level level, String msg)
+    { System.out.println((level.isClientSide ? "[CLIENT]: " : "[SERVER]: ") + msg); }
 
     public static float random(float min, float max)
     { return (float) (min + Math.random() * (max - min)); }
@@ -74,5 +90,14 @@ public class GwUtils {
 
     private static <T extends Comparable<T>> BlockState copySpecificProperty( BlockState from, BlockState to, Property<T> property)
     { return to.setValue(property, from.getValue(property)); }
+
+    public static Vec3 getPolygonCenter(List<BlockPos> positions) {
+        double sumX = 0; double sumY = 0; double sumZ = 0;
+
+        for (BlockPos pos : positions)
+        { sumX += pos.getX(); sumY += pos.getY(); sumZ += pos.getZ(); }
+
+        return new Vec3(sumX / positions.size(), sumY / positions.size(), sumZ / positions.size());
+    }
 }
 

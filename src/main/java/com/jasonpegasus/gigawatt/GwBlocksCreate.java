@@ -1,26 +1,15 @@
 package com.jasonpegasus.gigawatt;
 
-import com.jasonpegasus.gigawatt.block.ParticleAcceleratorBlock;
-import com.jasonpegasus.gigawatt.block.RepairStationBlock;
-import com.jasonpegasus.gigawatt.block.SteamVentBlock;
-import com.jasonpegasus.gigawatt.block.UraniumRodsBlock;
-import com.simibubi.create.AllDisplaySources;
-import com.simibubi.create.AllMountedStorageTypes;
+import com.jasonpegasus.gigawatt.block.*;
+import com.jasonpegasus.gigawatt.item.PAControllerItem;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
-import com.simibubi.create.content.logistics.depot.MountedDepotInteractionBehaviour;
-import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.BuilderTransformers;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 
-import static com.simibubi.create.api.behaviour.display.DisplaySource.displaySource;
-import static com.simibubi.create.api.behaviour.interaction.MovingInteractionBehaviour.interactionBehaviour;
-import static com.simibubi.create.api.contraption.storage.item.MountedItemStorageType.mountedItemStorage;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
@@ -87,7 +76,20 @@ public class GwBlocksCreate {
             .transform(customItemModel("_", "block"))
             .register();
 
-    public static final BlockEntry<ParticleAcceleratorBlock> PARTICLE_ACCELERATOR_CONTROLLER = REGISTRATE.block("particle_accelerator_controller", ParticleAcceleratorBlock::new)
+    public static final BlockEntry<PAControllerBlock> PARTICLE_ACCELERATOR_CONTROLLER = REGISTRATE.block("particle_accelerator_controller", PAControllerBlock::new)
+            .transform(axeOrPickaxe())
+            .properties(p -> p
+                    .noOcclusion()
+                    .mapColor(MapColor.COLOR_LIGHT_GRAY)
+                    .strength(20)
+                    .explosionResistance(500)
+                    .sound(SoundType.NETHERITE_BLOCK)
+            )
+            .item(PAControllerItem::new)
+            .transform(customItemModel("_", "block"))
+            .register();
+
+    public static final BlockEntry<PAModuleBlock> PARTICLE_ACCELERATOR_MODULE = REGISTRATE.block("particle_accelerator_module", PAModuleBlock::new)
             .transform(axeOrPickaxe())
             .properties(p -> p
                     .noOcclusion()

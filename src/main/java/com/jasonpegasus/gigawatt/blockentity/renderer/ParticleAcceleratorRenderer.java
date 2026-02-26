@@ -1,74 +1,64 @@
 package com.jasonpegasus.gigawatt.blockentity.renderer;
 
 import com.jasonpegasus.gigawatt.Gigawatt;
-import com.jasonpegasus.gigawatt.blockentity.ParticleAcceleratorBlockEntity;
+import com.jasonpegasus.gigawatt.GwModels;
+import com.jasonpegasus.gigawatt.GwUtils;
+import com.jasonpegasus.gigawatt.blockentity.PAControllerBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllPartialModels;
-import com.simibubi.create.content.contraptions.actors.contraptionControls.ContraptionControlsBlock;
-import com.simibubi.create.content.contraptions.actors.contraptionControls.ContraptionControlsBlockEntity;
-import com.simibubi.create.content.contraptions.actors.contraptionControls.ContraptionControlsMovement.ElevatorFloorSelection;
-import com.simibubi.create.content.contraptions.behaviour.MovementContext;
-import com.simibubi.create.content.contraptions.render.ContraptionMatrices;
-import com.simibubi.create.content.redstone.DirectedDirectionalBlock;
-import com.simibubi.create.content.redstone.nixieTube.NixieTubeRenderer;
+import com.simibubi.create.content.kinetics.press.PressingBehaviour;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
-import com.simibubi.create.foundation.utility.DyeHelper;
-import com.simibubi.create.foundation.virtualWorld.VirtualRenderWorld;
 
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
-import dev.engine_room.flywheel.lib.transform.TransformStack;
-import net.createmod.catnip.animation.AnimationTickHolder;
-import net.createmod.catnip.data.Couple;
 import net.createmod.catnip.math.AngleHelper;
 import net.createmod.catnip.math.VecHelper;
 import net.createmod.catnip.render.CachedBuffers;
-import net.createmod.catnip.theme.Color;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.renderer.LevelRenderer;
+import net.createmod.catnip.render.SuperByteBuffer;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.DyeColor;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
-public class ParticleAcceleratorRenderer extends SmartBlockEntityRenderer<ParticleAcceleratorBlockEntity> {
-    public ParticleAcceleratorRenderer(Context context) {
-        super(context);
-    }
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-    protected static final PartialModel button = PartialModel.of(Gigawatt.asResource("block/particle_accelerator_controller/accelerator_controller_meter"));
+public class ParticleAcceleratorRenderer extends SmartBlockEntityRenderer<PAControllerBlockEntity> {
+    public ParticleAcceleratorRenderer(Context context) { super(context); }
+
 
     @Override
-    protected void renderSafe(ParticleAcceleratorBlockEntity blockEntity, float pt, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-        BlockState blockState = blockEntity.getBlockState();
-        Direction facing = blockState.getValue(DirectionalBlock.FACING).getOpposite();
+    protected void renderSafe(PAControllerBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+        super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
+        ParticleAcceleratorRenderHelper helper = be.renderHelper;
+        if (!be.canWork() || helper == null) {
+            GwUtils.print("Can work?: "+ be.canWork());
+            GwUtils.print("Render Helper is null?: " + (helper == null));
+            return;
+        }
 
-        Vec3 buttonMovementAxis = VecHelper.rotate(new Vec3(0, 0, 0), AngleHelper.horizontalAngle(facing), Axis.Y);
-        Vec3 buttonMovement = buttonMovementAxis.scale(-0.07f + -1 / 24f);
-        Vec3 buttonOffset = buttonMovementAxis.scale(0.07f);
+        int lightIntensity = (int) Mth.lerp(((float) be.speed)/100, 5, 15);
+        int glowLight = LightTexture.pack(lightIntensity, lightIntensity);
 
-        ms.pushPose();
-        ms.translate(buttonMovement.x, buttonMovement.y+0.5, buttonMovement.z);
+        BlockState blockState = be.getBlockState();
 
-        super.renderSafe(blockEntity, pt, ms, buffer, light, overlay);
+        SuperByteBuffer headRender = CachedBuffers.partial(GwModels.particle_spin, blockState);
+        Vec2 rot = helper.getNextRotation();
 
-        ms.translate(buttonOffset.x, buttonOffset.y, buttonOffset.z);
+        headRender.translate(helper.getNextPosition())
+                .rotateDegrees(rot.x, Axis.Y).rotateDegrees(rot.y, Axis.X)
+                .light(glowLight)
+                .renderInto(ms, buffer.getBuffer(RenderType.translucent()));
 
-        VertexConsumer vc = buffer.getBuffer(RenderType.solid());
-        CachedBuffers.partialFacing(button, blockState, facing)
-                .light(light)
-                .renderInto(ms, vc);
-
-        ms.popPose();
     }
-}
 
+    @Override public boolean shouldRenderOffScreen(PAControllerBlockEntity blockEntity) { return true; }
+}
